@@ -8,6 +8,11 @@ const getFoodName = () => {
 }
 
 export default function handler(req, res){
+
+    if (req.method !== "POST"){
+        res.status(404).json({status: 404, message: "Not Found"})
+    }
+
     const { intent } = req.body
 
     console.log(res)
