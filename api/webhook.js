@@ -34,8 +34,8 @@ export default function handler(req, res){
 
     if (queryResult.intent.displayName === "whattoeat"){
         const foodName = getFoodName()
-        const pre = ["ผมว่านะ ลอง", "พี่ลองกิน", "พี่เคยลองกิน", ""]
-        const post = ["ดีมั้ย", "ดีป้ะ", "ดูดิ", "สิ"]
+        const pre = ["ผมว่านะ ลอง", "พี่ลองกิน", "กิน", ""]
+        const post = ["ดีมั้ย", "ดีป้ะ", "ดูดิ", "สิ", " เชื่อผม"]
 
         const message = pre[Math.floor(Math.random() * pre.length)] + foodName + post[Math.floor(Math.random() * post.length)]
 
