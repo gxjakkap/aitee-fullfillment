@@ -23,7 +23,7 @@ export default function handler(req, res){
         return
     }
 
-    if (!req.body || !req.bodt.queryResult.intent){
+    if (!req.body || !req.body.queryResult.intent){
         res.status(200).json({status: 200, message: "OK"})
         return
     }
