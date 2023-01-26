@@ -23,16 +23,16 @@ export default function handler(req, res){
         return
     }
 
-    if (!req.body || !req.body.queryResult.intent){
+    if (!req.body || !req.body.queryResult){
         res.status(200).json({status: 200, message: "OK"})
         return
     }
     
     console.log(req.body)
 
-    const { intent } = req.body.queryResult
+    const { queryResult } = req.body
 
-    if (intent.displayName === "whattoeat"){
+    if (queryResult.intent.displayName === "whattoeat"){
         const foodName = getFoodName()
         const pre = ["ผมว่านะ ลอง", "พี่ลองกิน", "พี่เคยลองกิน", ""]
         const post = ["ดีมั้ย", "ดีป้ะ", "ดูดิ", "สิ"]
