@@ -27,10 +27,10 @@ export default function handler(req, res){
         res.status(200).json({status: 200, message: "OK"})
         return
     }
+    
+    console.log(req.body)
 
     const { intent } = req.body.queryResult
-
-    console.log(req.body)
 
     if (intent.displayName === "whattoeat"){
         const foodName = getFoodName()
