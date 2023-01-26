@@ -14,6 +14,15 @@ export default function handler(req, res){
         return
     }
 
+    const cred = req.headers['authorization']
+
+    const eCr = 'Basic ' + process.env.CREDENTIALS
+
+    if (cred !== eCr){
+        res.status(403).json({status: 403, message: "Forbidden"})
+        return
+    }
+
     const { intent } = req.body
 
     console.log(res)
