@@ -25,7 +25,7 @@ export default function handler(req, res){
 
     const { intent } = req.body
 
-    console.log(res)
+    console.log(res.body)
 
     if (intent.name === "whattoeat"){
         const foodName = getFoodName()
