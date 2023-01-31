@@ -50,13 +50,11 @@ export default function handler(req, res){
                     text: {
                         text: [message]
                     },
-                    payload: {
-                        line: {
-                            type: "sticker",
-                            packageId: "6359",
-                            stickerId: "11069850"
-                        }
-                    }
+                    line: {
+                        type: "sticker",
+                        packageId: "6359",
+                        stickerId: "11069850"
+                    }                        
                 }
             ]
         }
