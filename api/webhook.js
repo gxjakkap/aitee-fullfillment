@@ -44,7 +44,7 @@ export default function handler(req, res){
 
         const message = pre[Math.floor(Math.random() * pre.length)] + foodName + post[Math.floor(Math.random() * post.length)]
 
-        res.status(200).json({
+        const rep = {
             /* fulfillmentText: message */
             fulfullmentMessages: [
                 {
@@ -60,7 +60,11 @@ export default function handler(req, res){
                     } */
                 }
             ]
-        })
+        }
+
+        console.log(rep)
+
+        res.status(200).json(rep)
     }
     else {
         res.status(200).json({})
