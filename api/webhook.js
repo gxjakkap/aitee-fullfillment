@@ -46,7 +46,7 @@ export default function handler(req, res){
 
         const rep = {
             /* fulfillmentText: message */
-            fulfullmentMessages: [
+            fulfillmentMessages: [
                 {
                     text: {
                         text: [message]
