@@ -49,12 +49,12 @@ export default function handler(req, res){
                 {
                     text: {
                         text: [message]
-                    },
+                    }/* ,
                     line: {
                         type: "sticker",
                         packageId: "6359",
                         stickerId: "11069850"
-                    }                        
+                    }       */                  
                 }
             ]
         }
