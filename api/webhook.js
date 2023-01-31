@@ -45,19 +45,18 @@ export default function handler(req, res){
         const message = pre[Math.floor(Math.random() * pre.length)] + foodName + post[Math.floor(Math.random() * post.length)]
 
         const rep = {
-            /* fulfillmentText: message */
             fulfillmentMessages: [
                 {
                     text: {
                         text: [message]
                     },
-                    /* payload: {
+                    payload: {
                         line: {
                             type: "sticker",
                             packageId: "6359",
                             stickerId: "11069850"
                         }
-                    } */
+                    }
                 }
             ]
         }
