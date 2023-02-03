@@ -93,13 +93,18 @@ export default function handler(req, res){
 
     const { queryResult } = req.body
 
-    if (queryResult.intent.displayName === "whattoeat"){
-        whattoeatMW(res)
-    }
-    else if (queryResult.intent.displayName === "whattodrink") {
-        whattodrinkMW(res)
-    }
-    else {
-        res.status(200).json({})
+
+    switch (queryResult.intent.displayName) {
+        case "whattoeat":
+            whattoeatMW(res)
+            break;
+        
+        case "whattodrink":
+            whattodrinkMW(res)
+            break;
+    
+        default:
+            res.status(200).json({})
+            break;
     }
 }
