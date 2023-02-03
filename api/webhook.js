@@ -12,6 +12,62 @@ const getDrinksName = () => {
     return drinksList[x]
 }
 
+const whattoeatMW = (res) => {
+    const foodName = getFoodName()
+    const pre = ["ผมว่านะ ลอง", "พี่ลองกิน", "กิน", "", "ลอง"]
+    const post = ["ดีมั้ย", "ดีป้ะ", "ดูดิ", "สิ", " เชื่อผม"]
+
+    const message = pre[Math.floor(Math.random() * pre.length)] + foodName + post[Math.floor(Math.random() * post.length)]
+
+    const rep = {
+        fulfillmentMessages: [
+            {
+                text: {
+                    text: [message]
+                }/* ,
+                line: {
+                    type: "sticker",
+                    packageId: "6359",
+                    stickerId: "11069850"
+                }       */                  
+            }
+        ]
+    }
+
+    console.log(rep)
+
+    res.status(200).json(rep)
+    return
+}
+
+const whattodrinkMW = (res) => {
+    const drinkName = getDrinksName()
+    const pre = ["ผมว่านะ ลอง", "พี่ลองกิน", "กิน", "", "ลอง"]
+    const post = ["ดีมั้ย", "ดีป้ะ", "ดูดิ", "สิ", " เชื่อผม", "มั้ย สดชื่นๆ"]
+
+    const message = pre[Math.floor(Math.random() * pre.length)] + drinkName + post[Math.floor(Math.random() * post.length)]
+
+    const rep = {
+        fulfillmentMessages: [
+            {
+                text: {
+                    text: [message]
+                }/* ,
+                line: {
+                    type: "sticker",
+                    packageId: "6359",
+                    stickerId: "11069850"
+                }       */                  
+            }
+        ]
+    }
+
+    console.log(rep)
+
+    res.status(200).json(rep)
+    return
+}
+
 export default function handler(req, res){
 
     if (req.method !== "POST"){
@@ -38,30 +94,10 @@ export default function handler(req, res){
     const { queryResult } = req.body
 
     if (queryResult.intent.displayName === "whattoeat"){
-        const foodName = getFoodName()
-        const pre = ["ผมว่านะ ลอง", "พี่ลองกิน", "กิน", ""]
-        const post = ["ดีมั้ย", "ดีป้ะ", "ดูดิ", "สิ", " เชื่อผม"]
-
-        const message = pre[Math.floor(Math.random() * pre.length)] + foodName + post[Math.floor(Math.random() * post.length)]
-
-        const rep = {
-            fulfillmentMessages: [
-                {
-                    text: {
-                        text: [message]
-                    }/* ,
-                    line: {
-                        type: "sticker",
-                        packageId: "6359",
-                        stickerId: "11069850"
-                    }       */                  
-                }
-            ]
-        }
-
-        console.log(rep)
-
-        res.status(200).json(rep)
+        whattoeatMW(res)
+    }
+    else if (queryResult.intent.displayName === "whattodrink") {
+        whattodrinkMW(res)
     }
     else {
         res.status(200).json({})
