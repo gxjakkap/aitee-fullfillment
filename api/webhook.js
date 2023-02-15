@@ -12,6 +12,13 @@ const getDrinksName = () => {
     return drinksList[x]
 }
 
+const getSongsName = () => {
+    const songList = ['q5nAxoCIvy4', '6f5sozKp0R0', 'H5cfhMe3SuY', 'rPzC1o8E4t0', 'iRqptvgqQPo', '21E3MNWz5m4', '10LhhygC_SA', 'fInw31Xf488', 'kds-99H7ek0', 'H5v3kku4y6Q', 'mW92wLzwGhM', '4HLumkaPcCI', '8i_uPqIFlY8', 'DJ-t5-CRSZY', '4xvSFYbVa0U', 'ks7p6DA0dKk']
+    const x = Math.floor(Math.random() * songList.length)
+
+    return `https://youtu.be/${songList[x]}`
+}
+
 const whattoeatMW = (res) => {
     const foodName = getFoodName()
     const pre = ["ผมว่านะ ลอง", "พี่ลองกิน", "กิน", "", "ลอง"]
@@ -68,6 +75,34 @@ const whattodrinkMW = (res) => {
     return
 }
 
+const whattolistenMW = (res) => {
+    const songName = getSongsName()
+    /* const pre = ["ผมว่านะ ลอง", "พี่ลองกิน", "กิน", "", "ลอง"]
+    const post = ["ดีมั้ย", "ดีป้ะ", "ดูดิ", "สิ", " เชื่อผม"] */
+
+    /* const message = pre[Math.floor(Math.random() * pre.length)] + foodName + post[Math.floor(Math.random() * post.length)] */
+
+    const rep = {
+        fulfillmentMessages: [
+            {
+                text: {
+                    text: [songName]
+                }/* ,
+                line: {
+                    type: "sticker",
+                    packageId: "6359",
+                    stickerId: "11069850"
+                }       */                  
+            }
+        ]
+    }
+
+    console.log(rep)
+
+    res.status(200).json(rep)
+    return
+}
+
 export default function handler(req, res){
 
     if (req.method !== "POST"){
@@ -101,6 +136,10 @@ export default function handler(req, res){
         
         case "whattodrink":
             whattodrinkMW(res)
+            break;
+        
+        case "whattolisten":
+            whattolistenMW(res)
             break;
     
         default:
