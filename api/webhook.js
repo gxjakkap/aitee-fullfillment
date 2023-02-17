@@ -115,10 +115,12 @@ const randomMemeMW = (res) => {
         const rep = {
             fulfillmentMessages: [
                 {
-                    line: {
-                        type: "image",
-                        originalContentUrl: data[0],
-                        previewImageUrl: data[1]
+                    payload: {
+                        line: {
+                            type: "image",
+                            originalContentUrl: data[0],
+                            previewImageUrl: data[1]
+                        }
                     }
                 }
             ]
