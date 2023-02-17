@@ -23,7 +23,7 @@ const getRandomMeme = async () => {
     const memeData = await fetch('https://meme-api.com/gimme')
     const rsp = await memeData.json()
     console.log(rsp)
-    return [rsp.url, rsp.preview[0]]
+    return [rsp.url, rsp.preview[rsp.preview.length - 1]]
 }
 
 const whattoeatMW = (res) => {
