@@ -20,8 +20,10 @@ const getSongsLink = () => {
 }
 
 const getRandomMeme = async () => {
-    const memeData = await fetch('https://meme-api.com/gimme').then(res => { res.json().then(json => { return json }) })
-    return [memeData.url, memeData.preview[0]]
+    const memeData = await fetch('https://meme-api.com/gimme')
+    const rsp = await memeData.json()
+    console.log(rsp)
+    return [rsp.url, rsp.preview[0]]
 }
 
 const whattoeatMW = (res) => {
