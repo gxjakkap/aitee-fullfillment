@@ -50,6 +50,13 @@ const getRandomCat = async () => {
     return [`https://cataas.com${rsp.url}`, `https://cataas.com${rsp.url}`]
 }
 
+const getRandomDog = async () => {
+    const dogData = await fetch('https://dog.ceo/api/breeds/image/random')
+    const rsp = await dogData.json()
+    console.log(rsp)
+    return [rsp.message, rsp.message]
+}
+
 const whattoeatMW = (res) => {
     const foodName = getFoodName()
     const pre = ["ผมว่านะ ลอง", "พี่ลองกิน", "กิน", "", "ลอง"]
@@ -164,6 +171,31 @@ const catpicMW = (res) => {
     return
 }
 
+const dogpicMW = (res) => {
+    getRandomDog().then(data => {
+        console.log(data)
+        const rep = {
+            fulfillmentMessages: [
+                {
+                    payload: {
+                        line: {
+                            type: "image",
+                            originalContentUrl: data[0],
+                            previewImageUrl: data[1]
+                        }
+                    }
+                }
+            ]
+        }
+
+        console.log(rep)
+
+        res.status(200).json(rep)
+        return
+    })
+    return
+}
+
 export default function handler(req, res) {
 
     if (req.method !== "POST") {
@@ -205,6 +237,10 @@ export default function handler(req, res) {
         
         case "catpic":
             catpicMW(res)
+            break;
+
+        case "dogpic":
+            dogpicMW(res)
             break;
 
         case "popgenrewtl":
