@@ -141,6 +141,7 @@ const randomMemeMW = (res) => {
 
 const catpicMW = (res) => {
     getRandomCat().then(data => {
+        console.log(data)
         const rep = {
             fulfillmentMessages: [
                 {
