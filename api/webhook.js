@@ -20,7 +20,6 @@ const getSongsLink = () => {
 }
 
 const getSongs = (intentName) => {
-
     const data = {
         popgenrewtl: ['-VeAUgO8Wtg', 'YjSPnhLy5N0', 'XqQMisU5En8', 'ENqhZpQ302c', 'q5nAxoCIvy4', 'DjWSpqDp8Eo', 'SJNFhQ1gdLo', 'u1rE-v-KpFY', 'AH7A9hBntE4', 'iRqptvgqQPo', 'LZWKYShMsus', '6f5sozKp0R0', 'fInw31Xf488', 'rPzC1o8E4t0', 'L5SSKx7H-gA', 's8QzkOulL5w', 'D-aCb9xsqTE', 'IkxhsTwNybU', 'NvBHCtMb5u8', 'guCCAF-fkNI', 'eXqDjhI9W6U', 'RzttASVRHAI', 'wizfyujwvfw', '5xYlc4OBnPg', 'aVKJrJbHUV0', 'xXUFl-hDG2g', 'zEt0-5fgy6I', 'B7riGDoRpR8', 'GMFdfDlmETE', 'FHGTJeskLYE', 'KsgDFv2c5gI', '8o_RAoWXJY'],
         rockgenrewtl: ['q3bWhsg9HH8', 'H5cfhMe3SuY', 'ZwcmNkzm7m0', 'I9TCLKlMzpc', 'ywtN9eWJRmE', 'JBAuRoIRAs8', 'XTWJFGF-Ev4', 'Cuoop11CL74', 'VNIE3VX1KeA', 'Wk2BPFVzvlQ', '8k6C_3Q4S1o', 'Whu6oBYdYvk', 'lfraUZsVfqk', 'bAQw8ZS_0kg', 'CMbYwYYFI3Y', '9Vp_5L0BOTg', 'UZxDLz-li_c', 'cg93Z3si7iA', '9pZ37Rsblyk', 'DkKr8fGIrCM', 'mJ55QUb_dvA', '2fv0qKJXZVQ', 'B9mgd2QIIgU', 'nIVOFq3Xyzs', 'eO8bQOqUU54', 'dXf3sWxIhfY', '6RF1Zz5xcNg', 'cqQAzpZBpAw', '1MQk_2_JBBY', 'UmeE7qc5MMc', 'Y9nSm9WaEdc', 'Cim5eyLZaiY'],
@@ -98,14 +97,14 @@ const whattodrinkMW = (res) => {
     return
 }
 
-const whattolistenMW = (intent, res) => {
+const whattolistenMW = (intent, pre, res) => {
     const songLink = getSongs(intent)
 
     const rep = {
         fulfillmentMessages: [
             {
                 text: {
-                    text: [songLink]
+                    text: [pre, songLink]
                 }
             }
         ]
@@ -190,7 +189,7 @@ export default function handler(req, res) {
         case "fallbackwtl":
         case "lovesongwtl":
         case "oldsongwtl":
-            whattolistenMW(queryResult.intent.displayName, res)
+            whattolistenMW(queryResult.intent.displayName, queryResult.fulfillmentText, res)
             break;
 
         default:
