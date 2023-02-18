@@ -47,7 +47,7 @@ const getRandomCat = async () => {
     const catData = await fetch('https://cataas.com/cat?json=true')
     const rsp = await catData.json()
     console.log(rsp)
-    return [`https://catass.com${rsp.url}`, `https://cdn.statically.io/img/catass.com/q=50${rsp.url}`]
+    return [`https://catass.com${rsp.url}`, `https://catass.com${rsp.url}`]
 }
 
 const whattoeatMW = (res) => {
