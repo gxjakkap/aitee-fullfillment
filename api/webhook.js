@@ -12,13 +12,6 @@ const getDrinksName = () => {
     return drinksList[x]
 }
 
-const getSongsLink = () => {
-    const songList = ['q5nAxoCIvy4', '6f5sozKp0R0', 'H5cfhMe3SuY', 'rPzC1o8E4t0', 'iRqptvgqQPo', '21E3MNWz5m4', '10LhhygC_SA', 'fInw31Xf488', 'kds-99H7ek0', 'H5v3kku4y6Q', 'mW92wLzwGhM', '4HLumkaPcCI', '8i_uPqIFlY8', 'DJ-t5-CRSZY', '4xvSFYbVa0U', 'ks7p6DA0dKk', 'JBAuRoIRAs8', '3O_Hxdtoyac', 'V69g4fo8oZ0', 'DxDSqoXT_SM', 'aHdtoDZlUKA', 'S3x2KC5DXf0', 'xPJJLvMUyfs', '3qy4JOWxkZ0', 'VVs5UHgafv8', 'ywtN9eWJRmE', 'eXqDjhI9W6U', 'AH7A9hBntE4', '-F1G2vgta6o', 'muLqukEiVm4', 'IMUxZVb50Rc', 'cM9SCz4pNQ4', 'W8a4sUabCUo', 'vv3um0BlygY', 'FTA0jyo_GoY', '5xYlc4OBnPg', 'zxND-svLcZ8', 'OG0lTKDNKUk', '5wunh46uVKY', 'dJ9uVVNWClk', 'fBZfrZadyNM', 'P2y-C4sQfCc', 'yOwwa4wjuJ0', '0msD8eJyRo0', 'u1rE-v-KpFY', 'H5cfhMe3SuY', 'UZxDLz-li_c', 'CMbYwYYFI3Y', 'lFD2eid8Ugw', 'BcUg0XKT3sI', 'j367e7BiEyU', 'g8z3rLjmFUc', 'pSUydWEqKwE', 'sVTy_wmn5SU', 'TArooQFjuNc', 'YJ3KDs33ItI', 'L0YF-qzCyJc', 'KzElkEA95ss', 'TKL8Sq14MiQ', '3h5tRt5eJjM', 'qUB81bn-GjQ']
-    const x = Math.floor(Math.random() * songList.length)
-
-    return `https://youtu.be/${songList[x]}`
-}
-
 const getSongs = (intentName) => {
     const data = {
         popgenrewtl: ['-VeAUgO8Wtg', 'YjSPnhLy5N0', 'XqQMisU5En8', 'ENqhZpQ302c', 'q5nAxoCIvy4', 'DjWSpqDp8Eo', 'SJNFhQ1gdLo', 'u1rE-v-KpFY', 'AH7A9hBntE4', 'iRqptvgqQPo', 'LZWKYShMsus', '6f5sozKp0R0', 'fInw31Xf488', 'rPzC1o8E4t0', 'L5SSKx7H-gA', 's8QzkOulL5w', 'D-aCb9xsqTE', 'IkxhsTwNybU', 'NvBHCtMb5u8', 'guCCAF-fkNI', 'eXqDjhI9W6U', 'RzttASVRHAI', 'wizfyujwvfw', '5xYlc4OBnPg', 'aVKJrJbHUV0', 'xXUFl-hDG2g', 'zEt0-5fgy6I', 'B7riGDoRpR8', 'GMFdfDlmETE', 'FHGTJeskLYE', 'KsgDFv2c5gI', '8o_RAoWXJY'],
@@ -49,6 +42,13 @@ const getRandomMeme = async () => {
     const rsp = await memeData.json()
     console.log(rsp)
     return [rsp.url, rsp.preview[rsp.preview.length - 1]]
+}
+
+const getRandomCat = async () => {
+    const catData = await fetch('https://cataas.com/cat?json=true')
+    const rsp = await catData.json()
+    console.log(rsp)
+    return [`https://catass.com${rsp.url}`, `https://cdn.statically.io/img/catass.com/q=50${rsp.url}`]
 }
 
 const whattoeatMW = (res) => {
@@ -140,6 +140,30 @@ const randomMemeMW = (res) => {
     return
 }
 
+const catpicMW = (res) => {
+    getRandomCat().then(data => {
+        const rep = {
+            fulfillmentMessages: [
+                {
+                    payload: {
+                        line: {
+                            type: "image",
+                            originalContentUrl: data[0],
+                            previewImageUrl: data[1]
+                        }
+                    }
+                }
+            ]
+        }
+
+        console.log(rep)
+
+        res.status(200).json(rep)
+        return
+    })
+    return
+}
+
 export default function handler(req, res) {
 
     if (req.method !== "POST") {
@@ -177,6 +201,10 @@ export default function handler(req, res) {
 
         case "randommeme":
             randomMemeMW(res)
+            break;
+        
+        case "catpic":
+            catpicMW(res)
             break;
 
         case "popgenrewtl":
