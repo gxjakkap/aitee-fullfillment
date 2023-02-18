@@ -104,7 +104,7 @@ const whattolistenMW = (intent, pre, res) => {
         fulfillmentMessages: [
             {
                 text: {
-                    text: [pre, songLink]
+                    text: [`${pre}\n${songLink}`]
                 }
             }
         ]
